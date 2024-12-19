@@ -45,11 +45,9 @@ export default {
           }
           this.users.splice(i, 1)
         }
-
       }catch(err){
         console.error(err)
       }
-
     },
 
     async update_user(id,first_name_up,last_name_up,email_up,phone_number_up){
@@ -123,6 +121,12 @@ export default {
 
 <template>
   <div class="users">
+
+    <div class="header">
+      <h3>Driver</h3>
+      <i class='bx bxs-plus-circle bx-md' @click="display_update=true"></i>
+    </div>
+
     <div v-for="user in this.users" :key="user.id">
       <div>
         <User
@@ -146,5 +150,12 @@ export default {
   display: flex;
   gap: 10px;
   flex-direction: column;
+}
+
+.header{
+  position: relative;
+  width: 90vw;
+  top: 90px;
+  left: 10%;
 }
 </style>

@@ -7,7 +7,6 @@ export default {
       display_update:false,
       newcapacity:0,
       tmpcapacity:this.capacity,
-
     }
   },
 
@@ -44,7 +43,7 @@ export default {
         <p> enter the new capacity</p>
         <input type="number" placeholder="capacity" v-model="newcapacity"/>
         <div>
-          <button class="btn btn-danger" @click="updatetruck">validate</button>
+          <button class="btn btn-success" @click="updatetruck">validate</button>
           <button class="btn btn-white" @click="display_update=false">abandon</button>
         </div>
         </div>
@@ -52,7 +51,6 @@ export default {
 </template>
 
 <style scoped>
-
 
 .box{
   background: #eaeaea;
