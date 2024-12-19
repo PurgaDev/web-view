@@ -7,6 +7,7 @@ export default {
   data(){
     return {
       display_update:false,
+
       first_name_up:this.first_name,
       last_name_up:this.last_name,
       email_up:this.email,
@@ -59,14 +60,14 @@ export default {
   <div class="usercontainer" v-if="phone_number_up.length>0">
 
     <div class="userdata">
-      <p>first_name : {{first_name}}</p>
-      <p>last_name : {{last_name}}</p>
-      <p>email : {{email}}</p>
-      <p>phone_number : {{phone_number}}</p>
+      <p>first name : {{first_name_up}}</p>
+      <p>last name : {{last_name_up}}</p>
+      <p>email : {{email_up}}</p>
+      <p>phone number : {{phone_number_up}}</p>
       <p>role : {{role}}</p>
     </div>
     <div class="actionbutton">
-      <input type="button" value="delete" @click="delete_user"/>
+      <input type="button" value="x" @click="delete_user"/>
       <input type="button" value="update" @click="display_update=true" />
     </div>
   </div>

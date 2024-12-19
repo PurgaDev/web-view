@@ -124,7 +124,7 @@ export default {
       <input type="checkbox" :checked="cleaned"  v-model="new_cleaned">
 
       <div>
-        <button class="btn btn-danger" @click="update_deposit">validate</button>
+        <button class="btn btn-success" @click="update_deposit">validate</button>
         <button class="btn btn-white" @click="display_update=false">abandon</button>
       </div>
     </div>
