@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import "bootstrap/dist/css/bootstrap.min.css"
+import "./assets/custom.scss"
 import "bootstrap/dist/js/bootstrap.min.js"
 import './style.css'
 import App from './App.vue'

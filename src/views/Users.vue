@@ -122,12 +122,12 @@ export default {
 <template>
   <div class="users">
 
-    <div class="header">
+    <!-- <div class="header">
       <h3>Driver</h3>
       <i class='bx bxs-plus-circle bx-md' @click="display_update=true"></i>
-    </div>
+    </div> -->
 
-    <div v-for="user in this.users" :key="user.id">
+    <!-- <div v-for="user in this.users" :key="user.id">
       <div>
         <User
             :first_name="user.first_name"
@@ -139,6 +139,42 @@ export default {
             @delete_user="delete_user"
             @update_user="update_user"
         ></User>
+      </div>
+    </div> -->
+
+    <div class="card p-3 m-4 mt-4 bg-white">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="card-title">Drivers</h3>
+          <button class="btn btn-outline-primary px-3 py-2 fw-medium d-flex align-items-center" @click="display_update=true">Create driver <i class="ms-2 bx bxs-plus-circle text-center fs-5"></i></button>
+        </div>
+        <table class="table caption-top"> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First name</th>
+              <th scope="col">Last name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone number</th>
+              <th scope="col">Role</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr v-for="user in this.users" class="py-3" :key="user.id">
+              <User
+                :first_name="user.first_name"
+                :last_name="user.last_name"
+                :email="user.email"
+                :id="user.pk"
+                :phone_number="user.phone_number"
+                :role="user.role"
+                @delete_user="delete_user"
+                @update_user="update_user"
+              ></User>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -157,5 +193,9 @@ export default {
   width: 90vw;
   top: 90px;
   left: 10%;
+}
+
+.table{
+  margin-top: 3rem;
 }
 </style>

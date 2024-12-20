@@ -215,7 +215,7 @@ export default {
 
   background: rgba(0, 255, 51, 0.09);
   border-radius: 30px;
-  color: #003C37;
+  color: #235F4E;
 
   font-weight: bolder;
   font-family: padmaa-Bold.1.1;

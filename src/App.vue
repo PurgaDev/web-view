@@ -1,5 +1,5 @@
 <template>
-  <div class="container1">
+  <div v-if="isLogin" class="container1">
     <div class="left_nav">
       <div class="icons">
         <i class='bx bxs-home bx-md ' @click="redirect('')"></i>
@@ -9,7 +9,7 @@
         <i class='bx bxs-user-pin bx-md' @click="redirect('users')"></i>
       </div>
     </div>
-    <div class="nav_bar">
+    <div class="nav_bar shadow-sm">
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
         <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
       </form>
@@ -20,7 +20,7 @@
       </div>
 
       <div class="connexion" v-if="display_con">
-        <button @click="gotogout" >logout</button>
+        <button @click="gotogout" class="btn btn-outline-primary fw-bold" >Logout</button>
       </div>
     </div>
 
@@ -33,13 +33,16 @@
 
     </div>
   </div>
+
+  <SignIn v-else></SignIn>
 </template>
 
 <script setup>
 import logout from "./components/Logout.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import {isAuthenticated} from "./router/utils.js";
+import SignIn from "./views/Sign-in.vue";
 
 let displaylogout = ref(false);
 let visiblelogout_btn = ref(true);
@@ -47,11 +50,15 @@ let visiblelogout_btn = ref(true);
 let display_con=ref(false);
 let state_log=ref(false);
 let state_sign=ref(false);
+const isLogin = ref(false);
 
 if (localStorage.getItem('user')){
   visiblelogout_btn.value=false
 }
 
+onMounted(() => {
+  isLogin.value = isAuthenticated()
+})
 
 const check = ()=>{
   displaylogout.value=true;
@@ -88,10 +95,10 @@ const gotogout = () => {
 
     position: fixed;
     top: 0;
-    left: 0;
+    left: 8%;
     z-index: 1;
 
-    width: 100vw;
+    min-width: 92%;
     height: 70px;
     padding-right: 25px;
   }
@@ -100,7 +107,7 @@ const gotogout = () => {
     z-index: 3;
     height: 100vh;
     min-width: 8%;
-    background: #003C37;
+    background: #235F4E;
     position: fixed;
     top: 0;
     left: 0;
@@ -141,6 +148,8 @@ const gotogout = () => {
   .display{
     position: relative;
     top: 90px;
-    left: 4%;
+    left: 8%;
+    height: 90.7vh;
+    width: 92%;
   }
 </style>

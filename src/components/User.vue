@@ -44,20 +44,36 @@ export default {
 <template>
   <div class="bg" @click.self="display_update=false" v-if="display_update">
     <div class="logout box">
-      <p> enter the new informations</p>
-      <input type="text" placeholder="first_name" v-model="first_name_up" />
-      <input type="text" placeholder="last_name" v-model="last_name_up" />
-      <input type="text" placeholder="phone_number" v-model="phone_number_up" maxlength="9"/>
-      <input type="email" placeholder="email" v-model="email_up"/>
-
-      <div>
-        <button class="btn btn-danger" @click="update_user">update</button>
-        <button class="btn btn-white" @click="display_update=false">abandon</button>
-      </div>
+      <form class="bg-white p-5 rounded-4 shadow-sm">
+        <h3 class="h3 mb-3">Enter the new informations</h3>
+        <div class="row">
+          <div class="col-12 mb-3">
+            <label for="first_name" class="form-label">First name</label>
+            <input type="text" id="first_name" class="form-control" placeholder="first_name" v-model="first_name_up" />
+          </div>
+          <div class="col-12 mb-3">
+            <label for="last_name" class="form-label">Last name</label>
+            <input type="text" id="last_name" class="form-control" placeholder="last_name" v-model="last_name_up" />
+          </div>
+          <div class="col-12 mb-3">
+            <label for="phone_number" class="form-label">Phone number</label>
+            <input type="text" id="phone_number" class="form-control" placeholder="phone number" v-model="phone_number_up" maxlength="9"/>
+          </div>
+          <div class="col-12 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control" placeholder="email" v-model="email_up"/>
+          </div>
+          <hr class="divider my-3">
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-secondary px-3 py-2 fw-medium" @click="display_update=false">Discard</button>
+            <button class="btn btn-primary px-3 py-2 fw-medium" @click="update_user">Update</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
-  <div class="usercontainer" v-if="phone_number_up.length>0">
+  <!-- <div class="usercontainer" v-if="phone_number_up.length>0">
 
     <div class="userdata">
       <p>first name : {{first_name_up}}</p>
@@ -70,7 +86,18 @@ export default {
       <input type="button" value="x" @click="delete_user"/>
       <input type="button" value="update" @click="display_update=true" />
     </div>
-  </div>
+  </div> -->
+
+  <th scope="row">{{ id }}</th>
+  <td>{{ first_name }}</td>
+  <td>{{ last_name }}</td>
+  <td>{{ email }}</td>
+  <td>{{ phone_number }}</td>
+  <td>{{ role }}</td>
+  <td class="actionbutton d-flex gap-3">
+    <button class="btn btn-outline-danger" type="button"  @click="delete_user"> <i class="bx bxs-trash"></i> </button>
+    <input class="btn btn-outline-primary" type="button" value="Update" @click="display_update=true" />
+  </td>
 </template>
 
 <style scoped>

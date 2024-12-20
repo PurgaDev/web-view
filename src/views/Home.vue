@@ -68,13 +68,13 @@ export default {
     <div class="container2">
       <div class="column1">
         <div class="stat">
-          <div class="stat1">
+          <div class="stat1 shadow-sm">
             <div class="elt"> Deposit : {{ nb_deposits }}</div>
             <div class="elt"> Reporting : {{nb_reports}}</div>
             <div class="elt"> Cleaned deposit : {{nb_cleaned_deposits}}</div>
           </div>
 
-          <div class="stat2">
+          <div class="stat2 shadow-sm">
             <div class="elt"> Trucks number</div>
             <div class="elt"> Driver number</div>
           </div>
@@ -87,10 +87,10 @@ export default {
       </div>
 
       <div class="column2">
-        <div class="trucks">
+        <div class="trucks shadow-sm">
           <div class="box">Staff</div>
         </div>
-        <div class="staff">
+        <div class="staff shadow-sm">
           <div class="box">Trucks</div>
         </div>
       </div>
@@ -119,7 +119,7 @@ export default {
   }
 
   .stat1 .elt{
-    background: #003C37;
+    background: #235F4E;
     padding: 20px;
     border-radius: 50px;
     width: fit-content;
@@ -138,7 +138,7 @@ export default {
   }
 
   .stat2{
-    background: #003C37;
+    background: #235F4E;
     border-radius: 30px;
     padding: 10px;
     color: white;
