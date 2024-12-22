@@ -67,9 +67,9 @@ export default {
 
 <template>
 
-  <div class="deposits">
+  <div class="deposits mt-3">
     <div v-for="deposit in deposits" :key="deposit.id">
-      <div v-if="deposit.description.length>0">
+      <!--div v-if="deposit.description.length>0" -->
         <Deposit :id="deposit.id"
                  :cleaned="deposit.cleaned"
                  :description="deposit.description"
@@ -79,7 +79,7 @@ export default {
                  @delete_deposit="delete_deposit"
                  @update_deposit="update_deposit"
         ></Deposit>
-      </div>
+      <!--/div -->
     </div>
   </div>
 

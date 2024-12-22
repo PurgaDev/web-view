@@ -31,22 +31,37 @@ export default {
 </script>
 
 <template>
-  <div class="truck">
+  <!-- <div class="truck">
     <p> driver : {{driver}}</p>
     <p>capacity : {{tmpcapacity}}</p>
     <button class="btn btn-success" @click="display_update=true" style="width: fit-content">update</button>
     <button class="btn btn-danger" @click="deletetruck" style="width: fit-content;margin-left: -20px">delete</button>
-  </div>
+  </div> -->
+  <th scope="row">{{ id }}</th>
+  <td>{{ tmpcapacity }}</td>
+  <td>{{ driver }}</td>
+  <td></td>
+  <td class="d-flex gap-3">
+    <button class="btn btn-success" @click="display_update=true" style="width: fit-content">Update</button>
+    <button class="btn btn-danger" @click="deletetruck" style="width: fit-content">Delete</button>
+  </td>
 
     <div class="bg" @click.self="display_update=false" v-if="display_update">
       <div class="logout box">
-        <p> enter the new capacity</p>
-        <input type="number" placeholder="capacity" v-model="newcapacity"/>
-        <div>
-          <button class="btn btn-success" @click="updatetruck">validate</button>
-          <button class="btn btn-white" @click="display_update=false">abandon</button>
-        </div>
-        </div>
+        <form class="">
+          <h3 class="mb-3">Enter the new capacity</h3>
+          <div class="row mt-3">
+            <div class="col-12 mb-3">
+              <label for="capacity" class="form-label">Capacity</label>
+              <input class="form-control" type="number" placeholder="capacity" v-model="newcapacity"/>
+            </div>
+            <div class="col-12 d-flex justify-content-between">
+              <button class="btn btn-secondary px-3 py-2" @click="display_update=false">Discard</button>
+              <button class="btn btn-primary px-3" @click="updatetruck">validate</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 </template>
 

@@ -101,7 +101,7 @@ export default {
 </script>
 
 <template>
-  <div class="de_container">
+  <div class="de_container border shadow-sm">
     <div class="description">
       <div>{{tmp}}</div>
     </div>

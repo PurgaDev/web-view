@@ -8,7 +8,16 @@ export default {
 
   data(){
     return {
-      users:[]
+      users:[],
+      drivers: [],
+      display_update: false,
+      formdata: {
+        first_name: "",
+        last_name: "",
+        phone_number: "",
+        email: "",
+        role: "driver"
+      }
     }
   },
 
@@ -37,13 +46,7 @@ export default {
         let i
         if (response.status === 200) {
           console.log('delete user successfully');
-          for (i=0; i < this.users.length; i++) {
-            if (this.users[i].id === id) {
-              this.users[i].phone_number=""
-              break
-            }
-          }
-          this.users.splice(i, 1)
+          this.users = this.users.filter(user => user.pk != id)
         }
       }catch(err){
         console.error(err)
@@ -81,7 +84,15 @@ export default {
           );
 
           if (response.status === 200) {
-
+            this.users = this.users.map(user => {
+              if(user.pk == id){
+                user.first_name = first_name_up
+                user.last_name = last_name_up
+                user.phone_number = phone_number_up
+                user.email = email_up
+              }
+              return user
+            })
             console.log('update user successfully');
           }
 
@@ -111,6 +122,29 @@ export default {
         console.log(err)
       }
 
+    },
+
+    async createdriver() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const access_token = user.access_token
+      try {
+        const response = await axios.post(
+          "http://127.0.0.1:8000/api/user/register/",
+          this.formdata,
+          {
+            headers: {
+              Authorization: `Bearer ${access_token}`,
+            }
+          }
+        )
+
+        if(response.status == 200) {
+          console.log(response.data)
+          this.users = this.users.unshift(response.data)
+        }
+      } catch (err) {
+        console.log(err)
+      }
     },
   },
   mounted() {
@@ -177,6 +211,41 @@ export default {
         </table>
       </div>
     </div>
+
+    <div class="bg" @click.self="display_update=false" v-if="display_update">
+      <div class="logout box bg-white p-5 rounded-4">
+        <h3 class="mb-3">Create driver</h3>
+        <form class="">
+          <div class="row mt-3">
+            <div class="col-12 col-lg-6 mb-3">
+              <label class="form-label">First name</label>
+              <input class="form-control" type="text" placeholder="first name" v-model="formdata.first_name"/>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+              <label class="form-label">Last name</label>
+              <input class="form-control" type="text" placeholder="first name" v-model="formdata.last_name"/>
+            </div>
+            <div class="col-12 mb-3">
+              <label class="form-label">Email</label>
+              <input class="form-control" type="email" placeholder="email" v-model="formdata.email"/>
+            </div>
+            <div class="col-12 mb-3"> 
+              <label class="form-label">Phone number</label>
+              <div class="row ms-1">
+                <label class="col-2 bg-primary text-center p-2 text-white fw-bold rounded-3">+237</label>
+                <div class="col-10">
+                  <input class="form-control" type="text" placeholder="phone number" v-model="formdata.phone_number"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 d-flex justify-content-between">
+              <button class="btn btn-secondary px-3 py-2 fw-medium" @click="display_update=false">Discard</button>
+              <button class="btn btn-primary px-3 fw-medium" @click="createdriver">Create</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
   </div>
 
 </template>
@@ -198,4 +267,31 @@ export default {
 .table{
   margin-top: 3rem;
 }
+.box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30%;
+
+  flex-direction: column;
+}
+
+.bg {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.33);
+    position: absolute;
+    top: -100px;
+    left: -230px;
+    width: 110vw;
+    height: 110vh;
+    min-width: 100vh;
+
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: backdrop-filter 0.5s ease;
+  }
 </style>

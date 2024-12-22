@@ -18,9 +18,9 @@ export default {
         const response = await axios.post(
             "http://127.0.0.1:8000/api/user/admin_login/",
             this.formdata,
-            {
-              withCredentials:true,
-            }
+            // {
+            //   withCredentials:true,
+            // }
         )
 
         if (response.status === 200) {
