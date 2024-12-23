@@ -62,7 +62,7 @@ export default {
       }
     },
 
-    async updatetruck(truck_id, newcapacity) {
+    async updatetruck(truck_id, newcapacity, driver) {
       this.display_update = false
 
       const user = JSON.parse(localStorage.getItem("user"));
@@ -73,7 +73,8 @@ export default {
             "http://127.0.0.1:8000/api/deposit/updatetruck/",
             {
               "truck_id": truck_id,
-              "capacity": newcapacity
+              "capacity": newcapacity,
+              "driver": driver,
             },
             {
               headers: {
@@ -82,13 +83,19 @@ export default {
             }
         )
         if (response.status === 200) {
-          for (let i = 0; i < this.trucks; i++) {
-            if (this.trucks[i].id === truck_id) {
-              this.trucks[i].capacity = newcapacity
-              break
+          // for (let i = 0; i < this.trucks; i++) {
+          //   if (this.trucks[i].id === truck_id) {
+          //     this.trucks[i].capacity = newcapacity
+          //     break
+          //   }
+          // }
+          // console.log(response.data)
+          this.trucks = this.trucks.map(truck => {
+            if(truck.id == truck_id) {
+              truck.capacity = newcapacity
             }
-          }
-          console.log(response.data)
+            return truck
+          })
         }
       } catch (err) {
         console.log(err)
@@ -159,6 +166,46 @@ export default {
       }
 
     },
+
+    async changeDriver(truck_id, driver_id) {
+      console.log("driver modified " + driver_id)
+      const user = JSON.parse(localStorage.getItem("user"));
+      const access_token = user.access_token
+      try {
+        const response = await axios.post(
+            "http://127.0.0.1:8000/api/deposit/createdrive/",
+            {
+              "truck_id": truck_id,
+              "driver_id": driver_id,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
+              },
+            }
+        )
+        if (response.status == 201) {
+          this.trucks = this.trucks.map((truck) => {
+            if(truck.id == truck_id) {
+              truck.current_driver =  {
+                "id": response.data['id'],
+                "driver_name": response.data['driver'],
+                "assignation_date": response.data['assignation_date'],
+              }
+
+              truck.drivers.push({
+                "pk": response.data['id'],
+                "driver_name": response.data['driver'],
+                "assignation_date": response.data['assignation_date'],
+              })
+            }
+            return truck
+          })
+        }
+      }catch (err){
+        console.log(err)
+      }
+    }
   },
 
   mounted() {
@@ -202,7 +249,7 @@ export default {
                     <th scope="col">#</th>
                     <th scope="col">Capacity</th>
                     <th scope="col">Driver</th>
-                    <th scope="col">Change Driver</th>
+                    <th scope="col">Assignation date</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
@@ -210,9 +257,11 @@ export default {
                   <tr v-for="truck in trucks">
                     <Truck :id="truck.id"
                       :capacity="truck.capacity"
-                      :driver="truck.driver"
+                      :drivers="drivers"
+                      :current_driver="truck.current_driver"
                       @updatetruck="updatetruck"
                       @deletetruck="deletetruck"
+                      @changedriver="changeDriver"
                     ></Truck>
                   </tr>
                 </tbody>

@@ -127,6 +127,7 @@ export default {
     async createdriver() {
       const user = JSON.parse(localStorage.getItem("user"));
       const access_token = user.access_token
+      this.formdata.phone_number = `+237${this.formdata.phone_number}`
       try {
         const response = await axios.post(
           "http://127.0.0.1:8000/api/user/register/",
