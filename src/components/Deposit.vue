@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios'
 import logout from "./Logout.vue";
+import { API_URL } from "../constante.js";
+
 export default {
   name: "Report",
   props:{
@@ -32,7 +34,7 @@ export default {
       const access_token = user.access_token
       try{
         const response = await axios.post(
-            "http://127.0.0.1:8000/api/deposit/delete/",
+            API_URL + "api/deposit/delete/",
             {
               pk: this.id
             },
@@ -68,7 +70,7 @@ export default {
 
         try{
           const response = await axios.post(
-              "http://127.0.0.1:8000/api/deposit/update/",
+              API_URL + "api/deposit/update/",
               {
                 pk: this.id ,
                 description: this.new_description,

@@ -1,6 +1,7 @@
 <script>
 import Deposit from "../components/Deposit.vue";
 import axios from 'axios'
+import { API_URL } from "../constante.js"
 
 export default {
   name: "Deposits",
@@ -20,7 +21,7 @@ export default {
       const access_token = user.access_token
 
       const response = await axios.get(
-          "http://127.0.0.1:8000/api/deposit/read/",
+          API_URL + "api/deposit/read/",
           {
             headers: {
               Authorization: `Bearer ${access_token}`,

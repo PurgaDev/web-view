@@ -1,6 +1,7 @@
 <script>
 import GoogleMap from "../components/GoogleMap.vue";
 import axios from 'axios'
+import { API_URL } from "../constante.js"
 
 export default {
   name: "Home",
@@ -20,7 +21,7 @@ export default {
         const access_token = user.access_token
 
         const response = await axios.get(
-            "http://127.0.0.1:8000/api/deposit/read/",
+            API_URL + "api/deposit/read/",
             {
               headers: {
                 Authorization: `Bearer ${access_token}`,
@@ -39,7 +40,7 @@ export default {
         }
 
       const response2 = await axios.get(
-          "http://127.0.0.1:8000/api/reporting/list/",
+          API_URL + "api/reporting/list/",
           {
             headers: {
               Authorization: `Bearer ${access_token}`,

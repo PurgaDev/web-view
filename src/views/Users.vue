@@ -1,6 +1,7 @@
 <script>
 import User from "../components/User.vue";
 import axios from 'axios'
+import { API_URL } from "../constante.js"
 
 export default {
   name: "Users",
@@ -34,7 +35,7 @@ export default {
       const access_token = user.access_token
       try{
         const response = await axios.delete(
-            "http://127.0.0.1:8000/api/user/userdelete/",
+            API_URL + "/user/userdelete/",
             {
               data: { id: id },
               headers: {
@@ -67,7 +68,7 @@ export default {
 
         try{
           const response = await axios.post(
-              "http://127.0.0.1:8000/api/user/userupdate/",
+              API_URL + "api/user/userupdate/",
               {
                 "id": id,
                 "first_name": first_name_up,
@@ -108,7 +109,7 @@ export default {
 
       try {
         const response = await axios.get(
-            "http://127.0.0.1:8000/api/user/userlist/",
+            API_URL + "api/user/userlist/",
             {
               headers: {
                 Authorization: `Bearer ${access_token}`,
@@ -130,7 +131,7 @@ export default {
       this.formdata.phone_number = `+237${this.formdata.phone_number}`
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/user/register/",
+          API_URL + "api/user/register/",
           this.formdata,
           {
             headers: {

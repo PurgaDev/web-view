@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+import { API_URL } from "../constante.js"
 
 export default {
   name: "Sign-in",
@@ -16,7 +17,7 @@ export default {
     async sign_in(){
       try{
         const response = await axios.post(
-            "http://127.0.0.1:8000/api/user/admin_login/",
+            API_URL + "api/user/admin_login/",
             this.formdata,
             // {
             //   withCredentials:true,

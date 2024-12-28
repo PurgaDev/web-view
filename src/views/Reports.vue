@@ -1,7 +1,7 @@
 <script>
 import Report from "../components/Report.vue";
 import axios from 'axios';
-
+import { API_URL } from "../constante.js"
 
 export default {
   name: "Reports",
@@ -19,7 +19,7 @@ export default {
       const access_token = user.access_token
 
       const response = await axios.get(
-          "http://127.0.0.1:8000/api/reporting/list/",
+          API_URL + "api/reporting/list/",
           {
             headers: {
               Authorization: `Bearer ${access_token}`,
@@ -32,7 +32,7 @@ export default {
         this.reports = response.data;
 
         for ( let i =0;i<this.reports.length;i++) {
-          this.reports[i].image=`http://127.0.0.1:8000${this.reports[i].image}`
+          this.reports[i].image=API_URL + `${this.reports[i].image.substring(1)}`
         }
       }
     },

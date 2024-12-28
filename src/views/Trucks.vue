@@ -1,7 +1,7 @@
 <script>
 import Truck from "../components/Truck.vue";
 import axios from 'axios'
-
+import { API_URL } from "../constante.js"
 
 export default {
   name: "Trucks",
@@ -25,7 +25,7 @@ export default {
 
       try {
         const response = await axios.get(
-            "http://127.0.0.1:8000/api/deposit/readtruck/",
+            API_URL + "api/deposit/readtruck/",
             {
               headers: {
                 Authorization: `Bearer ${access_token}`,
@@ -46,7 +46,7 @@ export default {
       console.log(pk)
       try {
         const response = await axios.delete(
-            "http://127.0.0.1:8000/api/deposit/deletetruck/",
+            API_URL + "/deposit/deletetruck/",
             {
               data: {truck_id: pk},
               headers: {
@@ -70,7 +70,7 @@ export default {
 
       try {
         const response = await axios.put(
-            "http://127.0.0.1:8000/api/deposit/updatetruck/",
+            API_URL + "api/deposit/updatetruck/",
             {
               "truck_id": truck_id,
               "capacity": newcapacity,
@@ -112,7 +112,7 @@ export default {
 
       try {
         const response = await axios.post(
-            "http://127.0.0.1:8000/api/deposit/createtruck/",
+            API_URL + "/api/deposit/createtruck/",
             {
               "capacity": this.capacity,
             },
@@ -124,7 +124,7 @@ export default {
         )
         if (response.status === 201) {
           const response2 = await axios.post(
-            "http://127.0.0.1:8000/api/deposit/createdrive/",
+            API_URL + "/deposit/createdrive/",
             {
               driver_id: this.driver,
               truck_id: response.data.id
@@ -150,7 +150,7 @@ export default {
 
       try {
         const response = await axios.get(
-            "http://127.0.0.1:8000/api/user/userlist/",
+            API_URL + "api/user/userlist/",
             {
               headers: {
                 Authorization: `Bearer ${access_token}`,
@@ -173,7 +173,7 @@ export default {
       const access_token = user.access_token
       try {
         const response = await axios.post(
-            "http://127.0.0.1:8000/api/deposit/createdrive/",
+            API_URL + "/deposit/createdrive/",
             {
               "truck_id": truck_id,
               "driver_id": driver_id,

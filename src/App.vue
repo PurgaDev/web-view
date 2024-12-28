@@ -2,11 +2,11 @@
   <div v-if="isLogin" class="container1">
     <div class="left_nav">
       <div class="icons">
-        <i class='bx bxs-home bx-md ' @click="redirect('')"></i>
-        <i class='bx bxs-report bx-md ' @click="redirect('reports')"></i>
-        <i class='bx bxs-trash bx-md' @click="redirect('deposits')"></i>
-        <i class='bx bxs-truck bx-md' @click="redirect('trucks')"></i>
-        <i class='bx bxs-user-pin bx-md' @click="redirect('users')"></i>
+        <i class='bx bxs-home bx-md ' @click="redirect('dashboard')"></i>
+        <i class='bx bxs-report bx-md ' @click="redirect('dashboard/reports')"></i>
+        <i class='bx bxs-trash bx-md' @click="redirect('dashboard/deposits')"></i>
+        <i class='bx bxs-truck bx-md' @click="redirect('dashboard/trucks')"></i>
+        <i class='bx bxs-user-pin bx-md' @click="redirect('dashboard/users')"></i>
       </div>
     </div>
     <div class="nav_bar shadow-sm">

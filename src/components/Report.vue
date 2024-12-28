@@ -1,6 +1,7 @@
 <script>
 import  axios from 'axios'
 import Update from "./Update_report.vue";
+import { API_URL } from "../constante.js"
 
 export default {
   name: "Report",
@@ -31,7 +32,7 @@ export default {
       const access_token = user.access_token
       try{
         const response = await axios.delete(
-            "http://127.0.0.1:8000/api/reporting/delete/",
+            API_URL + "api/reporting/delete/",
             {
               data: { pk: this.id },
               headers: {
@@ -69,7 +70,7 @@ export default {
 
         try{
           const response = await axios.put(
-              "http://127.0.0.1:8000/api/reporting/update/",
+              API_URL + "api/reporting/update/",
               {
                 reporting_id: this.id ,
                 description: this.description_update,
@@ -109,7 +110,7 @@ export default {
 
       try{
         const response = await axios.post(
-            "http://127.0.0.1:8000/api/reporting/validate/",
+            API_URL + "api/reporting/validate/",
             {
               reporting_id: this.id ,
               decision: "validate",

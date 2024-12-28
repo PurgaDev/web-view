@@ -10,13 +10,13 @@ import Users from "../views/Users.vue";
 
 
 const routes = [
-    {path: '/', name:'home', component: Home, meta: { requiresAuth: true }},
-    {path:'/sign-in', component: SignIn, name: 'sign-in', meta: { requiresAuth: false }},
-    {path:'/deposits', component: Deposits, name:'deposits', meta: { requiresAuth: true }},
-    {path:'/reports', component: Reports, name:'reports', meta: { requiresAuth: true }},
-    {path:'/trucks', component: Trucks, name:'trucks', meta: { requiresAuth: true }},
-    {path:'/staffs', component: Staffs, name:'staffs', meta: { requiresAuth: true }},
-    {path:'/users', component: Users, name:'users', meta: { requiresAuth: true }}
+    {path: '/dashboard', name:'home', component: Home, meta: { requiresAuth: true }},
+    {path:'/dashboard/sign-in', component: SignIn, name: 'sign-in', meta: { requiresAuth: false }},
+    {path:'/dashboard/deposits', component: Deposits, name:'deposits', meta: { requiresAuth: true }},
+    {path:'/dashboard/reports', component: Reports, name:'reports', meta: { requiresAuth: true }},
+    {path:'/dashboard/trucks', component: Trucks, name:'trucks', meta: { requiresAuth: true }},
+    {path:'/dashboard/staffs', component: Staffs, name:'staffs', meta: { requiresAuth: true }},
+    {path:'/dashboard/users', component: Users, name:'users', meta: { requiresAuth: true }}
 
     // { path: '/:pathMatch(.*)*', component: () => import('./views/NotFound.vue') },
 ]
