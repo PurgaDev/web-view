@@ -2,10 +2,14 @@
 import Truck from "../components/Truck.vue";
 import axios from 'axios'
 import { API_URL } from "../constante.js"
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "Trucks",
-  components:{Truck},
+  components:{
+    Truck,
+    Loader,
+  },
 
   data(){
     return{
@@ -13,7 +17,8 @@ export default {
       drivers: [],
       capacity:0,
       driver:null,
-      display_update:false
+      display_update:false,
+      isLoading:true,
     }
   },
 
@@ -36,6 +41,8 @@ export default {
         this.trucks = response.data
       } catch (err) {
         console.log(err)
+      }finally{
+        this.isLoading=false;
       }
     },
 
@@ -218,11 +225,13 @@ export default {
 
 <template>
   <div class="trucks-containers">
+    <Loader v-if="isLoading" :visible="isLoading" />
     <!-- <h3>trucks</h3>
     <i class='bx bxs-plus-circle bx-md' @click="display_update=true"></i>
 
     <div class="trucks">
-      <div v-for='truck in trucks' :key='truck.id' >
+
+      <div v-for='truck in trucks' :key='truck.id' v-if="!isLoading" >
         <div v-if="truck.capacity>0">
           <Truck :id="truck.id"
                  :capacity="truck.capacity"

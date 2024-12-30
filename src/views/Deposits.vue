@@ -2,15 +2,18 @@
 import Deposit from "../components/Deposit.vue";
 import axios from 'axios'
 import { API_URL } from "../constante.js"
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "Deposits",
   components:{
-    Deposit
+    Deposit,
+    Loader,
   },
   data(){
     return{
       deposits:[],
+      isLoading:true,
     }
   },
 
@@ -20,20 +23,26 @@ export default {
       const user = JSON.parse(localStorage.getItem("user"));
       const access_token = user.access_token
 
-      const response = await axios.get(
-          API_URL + "api/deposit/read/",
-          {
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-            },
-          }
+      try{
+        const response = await axios.get(
+            API_URL + "api/deposit/read/",
+            {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
+              },
+            }
 
-      )
+        )
 
-      if (response.status === 200) {
-        console.log(response.data);
-        this.deposits = response.data;
-      }
+        if (response.status === 200) {
+          console.log(response.data);
+          this.deposits = response.data;
+        }
+      }catch(erorr){
+        console.error("Error fetching deposits", error);
+      }finally{
+        this.isLoading = false;
+      }     
     },
 
     delete_deposit(pk){
@@ -57,8 +66,6 @@ export default {
 
   },
 
-
-
   mounted() {
     this.getdeposit();
   }
@@ -69,7 +76,9 @@ export default {
 <template>
 
   <div class="deposits mt-3">
-    <div v-for="deposit in deposits" :key="deposit.id">
+    <Loader v-if="isLoading" :visible="isLoading" />
+
+    <div v-for="deposit in deposits" :key="deposit.id" v-if="!isLoading">
       <!--div v-if="deposit.description.length>0" -->
         <Deposit :id="deposit.id"
                  :cleaned="deposit.cleaned"

@@ -2,10 +2,15 @@
 import User from "../components/User.vue";
 import axios from 'axios'
 import { API_URL } from "../constante.js"
+import Loader from "../components/Loader.vue";
+
 
 export default {
   name: "Users",
-  components:{User},
+  components:{
+    User,
+    Loader,
+  },
 
   data(){
     return {
@@ -18,7 +23,8 @@ export default {
         phone_number: "",
         email: "",
         role: "driver"
-      }
+      },
+      isLoading:true,
     }
   },
 
@@ -121,6 +127,8 @@ export default {
         }
       } catch (err) {
         console.log(err)
+      }finally{
+        this.isLoading=false;
       }
 
     },
@@ -157,13 +165,14 @@ export default {
 
 <template>
   <div class="users">
+    <Loader v-if="isLoading" :visible="isLoading" />
 
     <!-- <div class="header">
       <h3>Driver</h3>
       <i class='bx bxs-plus-circle bx-md' @click="display_update=true"></i>
     </div> -->
 
-    <!-- <div v-for="user in this.users" :key="user.id">
+    <!-- <div v-for="user in this.users" :key="user.id" v-if="!isLoading">
       <div>
         <User
             :first_name="user.first_name"
