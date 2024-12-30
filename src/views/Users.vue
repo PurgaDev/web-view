@@ -35,7 +35,7 @@ export default {
       const access_token = user.access_token
       try{
         const response = await axios.delete(
-            API_URL + "/user/userdelete/",
+            API_URL + "api/user/userdelete/",
             {
               data: { id: id },
               headers: {

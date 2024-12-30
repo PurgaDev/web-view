@@ -46,7 +46,7 @@ export default {
       console.log(pk)
       try {
         const response = await axios.delete(
-            API_URL + "/deposit/deletetruck/",
+            API_URL + "api/deposit/deletetruck/",
             {
               data: {truck_id: pk},
               headers: {
@@ -112,7 +112,7 @@ export default {
 
       try {
         const response = await axios.post(
-            API_URL + "/api/deposit/createtruck/",
+            API_URL + "api/deposit/createtruck/",
             {
               "capacity": this.capacity,
             },
@@ -124,7 +124,7 @@ export default {
         )
         if (response.status === 201) {
           const response2 = await axios.post(
-            API_URL + "/deposit/createdrive/",
+            API_URL + "api/deposit/createdrive/",
             {
               driver_id: this.driver,
               truck_id: response.data.id
@@ -173,7 +173,7 @@ export default {
       const access_token = user.access_token
       try {
         const response = await axios.post(
-            API_URL + "/deposit/createdrive/",
+            API_URL + "api/deposit/createdrive/",
             {
               "truck_id": truck_id,
               "driver_id": driver_id,

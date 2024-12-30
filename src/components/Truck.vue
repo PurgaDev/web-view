@@ -7,7 +7,7 @@ export default {
       display_update:false,
       newcapacity:this.capacity,
       tmpcapacity:this.capacity,
-      driver:this.current_driver.id,
+      driver:this.current_driver?.id,
     }
   },
 
@@ -27,7 +27,7 @@ export default {
       this.display_update=false
       this.tmpcapacity=this.newcapacity
       this.$emit("updatetruck",this.id,this.newcapacity)
-      if (this.driver != this.current_driver.id) {
+      if (this.driver != this.current_driver?.id) {
         this.$emit('changedriver',this.id ,this.driver)
       }
     },
@@ -57,8 +57,8 @@ export default {
   </div> -->
   <th scope="row">{{ id }}</th>
   <td>{{ tmpcapacity }}</td>
-  <td>{{ current_driver.driver_name }}</td>
-  <td>{{ formatDate(current_driver.assignation_date) }}</td>
+  <td>{{ current_driver?.driver_name }}</td>
+  <td>{{ formatDate(current_driver?.assignation_date) }}</td>
   <td class="d-flex gap-3">
     <button class="btn btn-success" @click="display_update=true" style="width: fit-content">Update</button>
     <button class="btn btn-danger" @click="deletetruck" style="width: fit-content">Delete</button>
