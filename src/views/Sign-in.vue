@@ -27,8 +27,7 @@ export default {
         if (response.status === 200) {
           console.log(response.data)
           localStorage.setItem("user", JSON.stringify(response.data))
-          location.reload()
-          this.$router.push({name:'home'})
+          this.$router.push({name:'home'}).then(() => {location.reload()});
         }
 
       }catch (e) {

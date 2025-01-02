@@ -10,7 +10,7 @@ import Users from "../views/Users.vue";
 
 
 const routes = [
-    {path: '/dashboard', name:'home', component: Home, meta: { requiresAuth: true }},
+    {path: '/dashboard/', name:'home', component: Home, meta: { requiresAuth: true }},
     {path:'/dashboard/sign-in', component: SignIn, name: 'sign-in', meta: { requiresAuth: false }},
     {path:'/dashboard/deposits', component: Deposits, name:'deposits', meta: { requiresAuth: true }},
     {path:'/dashboard/reports', component: Reports, name:'reports', meta: { requiresAuth: true }},

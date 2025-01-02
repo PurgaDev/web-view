@@ -38,7 +38,7 @@ export default {
       if (response.status === 200) {
         localStorage.removeItem("user")
       }
-      this.$router.push("/sign-in")
+      this.$router.push("/dashboard/").then(() => {location.reload()})
     },
 
     close(){

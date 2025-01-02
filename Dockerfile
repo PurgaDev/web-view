@@ -1,10 +1,5 @@
-FROM node:22-alpine
+FROM nginx:stable-alpine-slim
 
-WORKDIR /app
-COPY . .
-
-RUN npm install -g serve
+COPY ./dist /usr/share/nginx/html
 
 EXPOSE 80
-
-CMD [ "serve", "-s", "dist", "-l", "80" ]
